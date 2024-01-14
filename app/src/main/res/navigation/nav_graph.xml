@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/nav_movies">
+
+    <fragment
+        android:id="@+id/nav_movies"
+        android:name="com.casecode.mobilemovieexplorer.presentation.view.MoviesFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_movies">
+
+        <action
+            android:id="@+id/action_nav_movies_fragment_to_nav_details_fragment"
+            app:destination="@id/nav_details_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim">
+
+        </action>
+        <action
+            android:id="@+id/action_nav_movies_fragment_to_nav_favorite_fragment"
+            app:destination="@id/nav_favorite_fragment">
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_favorite_fragment"
+        android:name="com.casecode.mobilemovieexplorer.presentation.view.FavoriteMoviesFragment"
+        android:label="@string/favorite_movies"
+        tools:layout="@layout/fragment_favorite_movies">
+        <action
+            android:id="@+id/action_nav_favoirte_fragment_to_nav_details_fragment"
+            app:destination="@id/nav_details_fragment" />
+        <action
+            android:id="@+id/action_nav_favorite_fragment_to_nav_movies2"
+            app:destination="@id/nav_movies"
+
+            app:popUpTo="@id/nav_movies" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/nav_details_fragment"
+        android:name="com.casecode.mobilemovieexplorer.presentation.view.MoviesDetailsFragment"
+        android:label="@string/movie_details"
+        tools:layout="@layout/fragment_movies_details">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nav_details_fragment_to_nav_movies"
+            app:destination="@id/nav_movies"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/nav_movies" />
+
+    </fragment>
+</navigation>

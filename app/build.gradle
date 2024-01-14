@@ -1,0 +1,103 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.hilt)
+}
+
+android {
+    namespace 'com.casecode.mobilemovieexplorer'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.casecode.mobilemovieexplorer"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+    hilt {
+        enableAggregatingTask = true
+    }
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+}
+
+dependencies {
+    // AndroidX
+    implementation libs.core
+    implementation libs.appcompat
+    implementation libs.appcompat.resources
+    implementation libs.constraintLayout
+    implementation libs.recyclerView
+    implementation libs.recyclerViewSelection
+    implementation libs.navigationFragment
+    implementation libs.navigationUI
+    implementation libs.navigationDynamicFeatures
+    implementation libs.lifecycleViewmodel
+    implementation libs.lifecycleLivedata
+    implementation libs.lifecycleRuntime
+    implementation libs.lifecycleCompiler
+    implementation libs.coreSplashScreen
+    implementation libs.swiperefreshlayout
+
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    implementation libs.paginig
+    implementation libs.paginigRxjava
+
+    implementation libs.autodispose
+    implementation libs.autodispose.androidx.lifecycle
+   // implementation 'com.uber.autodispose:autodispose-rxlifecycle3:1.4.0'
+
+    // material
+    implementation libs.material
+
+    //Loading effect shimmer
+    implementation(libs.shimmer)
+
+    //Glide
+    implementation libs.glide
+    annotationProcessor libs.glideCompiler
+    implementation(libs.okhttp3.integration) {
+        exclude module: 'OkHttpLibraryGlideModule'
+    }
+
+    //lombok
+    compileOnly libs.projectlombok.lombok
+    annotationProcessor libs.projectlombok.lombok
+    // Hilt
+    implementation(libs.hilt.android)
+    annotationProcessor(libs.hilt.android.compiler)
+
+    //retrofit
+    implementation libs.retrofit
+    implementation libs.converter.gson
+    implementation libs.converter.scalars
+
+    // Rxjava
+    implementation libs.rxjava3.retrofit.adapter
+    implementation libs.adapter.rxjava3
+    implementation libs.rxandroid
+    implementation libs.rxjava
+
+    //room
+    implementation(libs.room.runtime)
+    implementation(libs.androidx.room.rxjava3)
+    annotationProcessor libs.androidx.room.compiler
+    implementation(libs.timber)
+}

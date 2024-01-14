@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.util.List" />
+
+        <import type="com.casecode.mobilemovieexplorer.domain.model.db.FavoriteMovie" />
+
+        <variable
+            name="favoriteMovies"
+            type="List&lt;FavoriteMovie>" />
+
+        <variable
+            name="favoriteAdapter"
+            type="com.casecode.mobilemovieexplorer.presentation.adapter.FavoriteAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_movies"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:setDataFavoriteMoviesAdapter="@{favoriteMovies}"
+                    app:setFavoriteMoviesAdapter="@{favoriteAdapter}"
+                    app:spanCount="3"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_favorite" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/imv_favorite_empty"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_item_movie"
+            android:backgroundTint="@color/color_mischka"
+            android:backgroundTintMode="screen"
+            android:contentDescription="@null"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gdl_favorite_top"
+            app:srcCompat="@drawable/favorite_24"
+            app:tint="@color/gray_color"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_favorite_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/normal_spacing"
+            android:text="@string/favorite_empty"
+            android:textAppearance="@style/TextAppearance.app.BodyLarge"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imv_favorite_empty"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_favorite_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tv_favorite_empty, imv_favorite_empty" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gdl_favorite_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

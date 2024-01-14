@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="clickListener"
+            type="com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener" />
+
+        <variable
+            name="movie"
+            type="com.casecode.mobilemovieexplorer.domain.model.movies.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/csl_item_movie_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{(view) -> clickListener.onItemClick(view,movie)}"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_movie_poster"
+            style="@style/Widget.app.CardView"
+            android:layout_width="@dimen/width_item_movie_card"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/small_spacing"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imv_item_movie"
+                android:layout_width="@dimen/width_item_movie_card"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:baseImage="@{@drawable/ic_error}"
+                app:loadImage="@{movie.posterPath()}"
+                tools:srcCompat="@tools:sample/avatars" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_item_movie_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/smaller_spacing"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:padding="@dimen/smaller_spacing"
+            android:text="@{movie.title()}"
+            android:textAppearance="@style/TextAppearance.app.TitleSmall"
+            android:textColor="@color/color_ebony_clay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cv_movie_poster"
+            app:layout_constraintTop_toTopOf="@+id/cv_movie_poster"
+            tools:text="Title " />
+
+        <TextView
+            android:id="@+id/tv_item_movie_overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/smaller_spacing"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:padding="@dimen/smaller_spacing"
+            android:text="@{movie.overview()}"
+            android:textAppearance="@style/TextAppearance.app.LabelSmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cv_movie_poster"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_title"
+            tools:text="A tormented father witnesses his young son die when caught in a gang's crossfire on Christmas Eve. While recovering from a wound that costs him his voice, he makes vengeance his life's mission and embarks on a punishing training regimen in order to avenge his son's death." />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
